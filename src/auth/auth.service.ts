@@ -4,6 +4,9 @@ import { UpdateAuthDto } from './dto/update-auth.dto';
 
 @Injectable()
 export class AuthService {
+  validateUser(email: string, password: string) {
+    throw new Error('Method not implemented.');
+  }
   create(createAuthDto: CreateAuthDto) {
     return 'This action adds a new auth';
   }
