@@ -1,4 +1,4 @@
-import { User } from '../entities/user.entity';
+import { ICreateUserParams } from './../structure.user';
 import {
   IsEmail,
   IsString,
@@ -7,7 +7,7 @@ import {
   MinLength,
 } from 'class-validator';
 
-export class CreateUserDto extends User {
+export class CreateUserDto implements ICreateUserParams {
   @IsEmail()
   email: string;
 

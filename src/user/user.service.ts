@@ -1,25 +1,24 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/database/cliente';
-import { CreateUserDto } from './dto/create-user.dto';
 import * as bcrypt from 'bcrypt';
+import { ICreateUserParams, IcreateUserService } from './structure.user';
+import { User } from '@prisma/client';
 
 @Injectable()
-export class UserService {
+export class UserService implements IcreateUserService {
   constructor(private readonly prisma: PrismaService) {}
-  async create(createUserDto: CreateUserDto) {
+  async execute(params: ICreateUserParams): Promise<Partial<User>> {
     const verify = await this.prisma.user.findUnique({
-      where: { email: createUserDto.email },
+      where: { email: params.email },
     });
 
-    if (verify) throw new ForbiddenException('user already exists ');
-
+    if (verify) throw new ForbiddenException('user already exists! ');
     const data = {
-      ...createUserDto,
-      password: await bcrypt.hash(createUserDto.password, 10),
+      ...params,
+      password: await bcrypt.hash(params.password, 10),
     };
 
     const createdUser = await this.prisma.user.create({ data });
-
     return {
       ...createdUser,
       password: undefined,
