@@ -1,7 +1,10 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/database/cliente';
 import * as bcrypt from 'bcrypt';
-import { ICreateUserParams, IcreateUserService } from './structure.user';
+import {
+  ICreateUserParams,
+  IcreateUserService,
+} from './structure/structure.user';
 import { User } from '@prisma/client';
 
 @Injectable()

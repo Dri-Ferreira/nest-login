@@ -1,4 +1,4 @@
-import { ICreateUserParams } from './../structure.user';
+import { ICreateUserParams } from '../structure/structure.user';
 import {
   IsEmail,
   IsString,
