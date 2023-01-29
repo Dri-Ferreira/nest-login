@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcrypt';
 import { ICreateUserParams } from 'src/user/structure/structure.user';
-import { UserPayload } from './models/UserPauload';
+import { UserPayload } from './models/UserPayload';
 import { JwtService } from '@nestjs/jwt';
 import { UserToken } from './models/UserToken';
 
@@ -22,7 +22,7 @@ export class AuthService {
     const jwtToken = this.jwtService.sign(payload);
     return {
       access_token: jwtToken,
-    }
+    };
   }
 
   async validateUser(email: string, password: string) {
